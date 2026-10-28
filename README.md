@@ -1,5 +1,8 @@
 # bjira
 
+> [!WARNING]
+> **Work in Progress**
+
 A lightweight command-line interface for Jira Cloud, written in Go.
 
 Manage and track Jira issues, sprints, and tasks directly from your terminal without using the web interface.
