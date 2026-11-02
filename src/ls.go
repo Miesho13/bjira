@@ -46,10 +46,11 @@ func ls_command() error {
 
 	var filter IssueFilter
 
-	flags.StringVar(&filter.user, "user", "", "Filter by user")
-	flags.StringVar(&filter.status, "status", "", "Filter by status")
+	flags.StringVar(&filter.user,"user", "", "Filter by user")
+	flags.StringVar(&filter.status,"status", "", "Filter by status")
 	flags.StringVar(&filter.sprint_name, "sprint", "", "Filter by sprint")
 	flags.StringVar(&filter.reporter, "reporter", "", "Filter by reporter")
+	flags.StringVar(&filter.grep, "grep", "", "Grep by description or summary")
 	flags.Parse(os.Args[2:])
 
 	issues, err := get_all_issue_filter(filter)

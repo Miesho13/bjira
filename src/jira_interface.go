@@ -15,6 +15,7 @@ type IssueFilter struct {
 	sprint_name string
 	status      string
 	reporter    string
+	grep        string
 }
 
 func jira_get(endpoint string) ([]byte, error) {
@@ -226,6 +227,15 @@ func get_all_issue_filter(filter IssueFilter) ([]JiraIssue, error) {
         s = strings.NewReplacer(`\`, `\\`, `"`, `\"`).Replace(s)
         return `"` + s + `"`
     }
+
+	// grep in description 
+	if grep := strings.TrimSpace(filter.grep); grep != "" {
+		term := quote(grep)
+		conditions = append(
+			conditions,
+			"(summary ~ "+term+" OR description ~ "+term+")",
+		)
+	}
 
 	// reporter filter
 	if filter.reporter == "" || filter.reporter == "all" {
